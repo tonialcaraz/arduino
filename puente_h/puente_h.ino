@@ -7,12 +7,14 @@
 #define input_a 2
 #define pwm 3
 #define input_b 4
+
 void setup()
 {
     pinMode(input_a, OUTPUT);
     pinMode(input_b, OUTPUT);
     
 }
+
 void loop()
 {
     //Giro a la derecha
@@ -26,7 +28,7 @@ void loop()
         delay(20);
     }
 
-    //Giro a la derecha
+    //Giro a la izq
     digitalWrite(input_a, LOW);
     digitalWrite(input_b, HIGH);
 
