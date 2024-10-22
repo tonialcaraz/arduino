@@ -27,10 +27,8 @@ void loop()
         analogWrite(pwm, i);
         delay(20);
     }
-
-    //Giro a la izq
-    digitalWrite(input_a, LOW);
-    digitalWrite(input_b, HIGH);
+    
+    delay(500);
 
     //Disminuye velocidad
     for (int i = 255; i > 0; i--)
@@ -38,8 +36,29 @@ void loop()
         analogWrite(pwm, i);
         delay(20);
     }
+    
+    delay(500);
 
+    //Giro a la izq
+    digitalWrite(input_a, LOW);
+    digitalWrite(input_b, HIGH);
+
+    //aumenta la velocidad hasta maximo 255
+    for (int i = 0; i < 255; i++)
+    {
+        analogWrite(pwm, i);
+        delay(20);
+    }
+    
+    delay(500);
+
+    //Disminuye velocidad
+    for (int i = 255; i > 0; i--)
+    {
+        analogWrite(pwm, i);
+        delay(20);
+    }
     //Esperar 1 segundo antes de volver a acelerar
-    delay(1000);
+    delay(500);
     
 }
