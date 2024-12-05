@@ -29,11 +29,14 @@ void loop()
   //Calcular los angulos de inclinacion
   float accel_ang_x = atan(ax / sqrt(pow(ay, 2) + pow(az, 2)))*(180.0 / 3.14);
   float accel_ang_y = atan(ay / sqrt(pow(ax, 2) + pow(az, 2)))*(180.0 / 3.14);
+  float accel_ang_z = atan( sqrt(pow(ax, 2) + pow(ay, 2))/az)*(180.0 / 3.14);
 
   // Mostrar resultados
   Serial.print(F("Inclinacion en X: "));
   Serial.print(accel_ang_x);
-  Serial.print(F("\tInclinacion en Y:"));
-  Serial.println(accel_ang_y);
+  Serial.print(F("\tInclinacion en Y: "));
+  Serial.print(accel_ang_y);
+  Serial.print(F("\tInclinacion en Z: "));
+  Serial.println(accel_ang_z);
   delay(500);
 }
