@@ -1,16 +1,31 @@
 #include <FastLED.h>
+#include <Keypad.h>
 #include "boton.h"
 
 //#define NUM_LEDS 128
 #define NUM_LEDS 300
 
-#define DATA_PIN 5  // Change this to match your LED strip's data pin
+#define DATA_PIN 4  // Change this to match your LED strip's data pin
 #define BRIGHTNESS 255
+
+const byte rowsCount = 4;
+const byte columsCount = 4;
+ 
+char keys[rowsCount][columsCount] = {
+   { '1','2','3', 'A' },
+   { '4','5','6', 'B' },
+   { '7','8','9', 'C' },
+   { '#','0','*', 'D' }
+};
+
+const byte rowPins[rowsCount] = { 12, 11, 10, 9 };
+const byte columnPins[columsCount] = { 8, 7, 6, 5 };
+Keypad keypad = Keypad(makeKeymap(keys), rowPins, columnPins, rowsCount, columsCount);
 
 CRGB leds[NUM_LEDS];
 
-BotonSimple botonA(9);
-BotonSimple botonB(6);
+BotonSimple botonA(3);
+BotonSimple botonB(2);
 
 void updateBotones(){
   botonA.actualizar();
@@ -97,8 +112,6 @@ void apaga(){
   }
 }
 
-String modoAnimacion="";
-
 void setup() {
   
   delay(2000);
@@ -112,32 +125,15 @@ void setup() {
 
 void loop() {
    
-    
-  updateBotones();
-  
-  switch ( botonA.leer() ) {
-    case SUELTO: ; break;
-    case APRETANDOLO: Serial.println("Acabas de apretar el botonA"); modoAnimacion="kitt"; break;
-    case APRETADO:  break;
-    case SOLTANDOLO: Serial.println("Acabas de soltar el botonA"); break;
-    default: break;
-  }
-
-  switch ( botonB.leer() ) {
-    case SUELTO: break;
-    case APRETANDOLO: Serial.println("Acabas de apretar el botonB"); modoAnimacion="apaga"; break;
-    case APRETADO: ; break;
-    case SOLTANDOLO: Serial.println("Acabas de soltar el botonB"); break;
-    default: break;
-  }
-
- //if (modoAnimacion=="kitt") {Police();}// updateBotones();}
- if (modoAnimacion=="kitt") {Police();}// updateBotones();}
- else if (modoAnimacion=="apaga") {apaga();} //updateBotones();}
  
-
-
-
+ char key = keypad.getKey();
+ switch ( key ) {
+    case '1': Serial.println("Acabas de apretar 1 - KITT ");kitt(); break;
+    case '2': Serial.println("Acabas de apretar 2 - KITT2 "); kitt2(); break;
+    case '3': Serial.println("Acabas de apretar 3 - POLICE "); Police() ;break;
+    case '0': Serial.println("Acabas de apretar 0 - STOP "); apaga(); break;
+    default: break;
+  }
 
  }
   
